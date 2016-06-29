@@ -13,20 +13,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void dropIn(View view) {
         ImageView imageSlot = (ImageView) view;
+        int imageSlotPosition = Integer.parseInt(imageSlot.getTag().toString());
 
-        Log.i("Scale", String.valueOf(imageSlot.getScaleX()));
-        imageSlot.setScaleX(0f);
-        imageSlot.setScaleY(0f);
+        if (this.slots[imageSlotPosition] == 2) {
 
-        if (this.activePlayer == 0) {
-            imageSlot.setImageResource(R.drawable.circle);
-            this.activePlayer = 1;
-        } else {
-            imageSlot.setImageResource(R.drawable.delete);
-            this.activePlayer = 0;
+            imageSlot.setScaleX(0f);
+            imageSlot.setScaleY(0f);
+
+            this.slots[imageSlotPosition] = this.activePlayer;
+
+            if (this.activePlayer == 0) {
+                imageSlot.setImageResource(R.drawable.circle);
+                this.activePlayer = 1;
+            } else {
+                imageSlot.setImageResource(R.drawable.delete);
+                this.activePlayer = 0;
+            }
+
+            imageSlot.animate().scaleXBy(1f).scaleYBy(1f).setDuration(100);
         }
-
-        imageSlot.animate().scaleXBy(1f).scaleYBy(1f).setDuration(300);
     }
 
     @Override
