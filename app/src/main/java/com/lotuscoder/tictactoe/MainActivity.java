@@ -1,11 +1,13 @@
 package com.lotuscoder.tictactoe;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lotuscoder.tictactoe.animations.BounceInterpolator;
 
@@ -34,20 +36,25 @@ public class MainActivity extends AppCompatActivity {
                 imageSlot.setImageResource(R.drawable.delete);
                 this.activePlayer = 0;
             }
-
+            
             final Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
-
             BounceInterpolator interpolator = new BounceInterpolator(0.1, 15);
 
             bounce.setInterpolator(interpolator);
             imageSlot.startAnimation(bounce);
+
+            this.changePlayer();
 
             for (int[] winningPosition : this.winningPositions) {
                 if (this.slots[winningPosition[0]] == this.slots[winningPosition[1]]
                         && this.slots[winningPosition[1]] == this.slots[winningPosition[2]]
                         && this.slots[winningPosition[0]] != 2) {
 
+
+
                 }
+
+
             }
         }
     }
@@ -56,5 +63,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    protected void changePlayer()
+    {
+        int color = ContextCompat.getColor(this, R.color.colorBlue);
+        CharSequence playerText = getText(R.string.playerBlue);
+
+        if (this.activePlayer == 1) {
+            color = ContextCompat.getColor(this, R.color.colorRed);
+            playerText = getText(R.string.playerRed);
+        }
+
+        TextView activePlayerTextView = (TextView) findViewById(R.id.activePlayer);
+        activePlayerTextView.setTextColor(color);
+        activePlayerTextView.setText(playerText);
     }
 }
