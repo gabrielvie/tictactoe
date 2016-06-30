@@ -6,4 +6,6 @@
 
     <color name="colorRed">#e74c3c</color>
     <color name="colorBlue">#3498db</color>
+    <color name="colorWetAsphalt">#CC34495e</color>
+    <color name="colorClouds">#ecf0f1</color>
 </resources>

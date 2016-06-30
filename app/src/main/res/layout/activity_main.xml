@@ -2,19 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="com.lotuscoder.tictactoe.MainActivity"
     android:background="#FFF">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="400dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_vertical_margin">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -163,5 +160,45 @@
                 android:tag="8"/>
         </GridLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorWetAsphalt"
+        android:touchscreenBlocksFocus="true"
+        android:visibility="invisible"
+        android:id="@+id/winnerMessageContainer">
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorClouds"
+            android:id="@+id/winnerMessageBox">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/playerBlueWinner"
+                android:textColor="@color/colorBlue"
+                android:id="@+id/winnerMessage"
+                android:textAlignment="center"
+                android:layout_margin="20dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/playAgainButton"
+                android:id="@+id/playAgainButton"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_below="@+id/winnerMessage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -4,4 +4,9 @@
     <string name="playerLabel">Player: </string>
     <string name="playerRed">Red</string>
     <string name="playerBlue">Blue</string>
+
+    <string name="playerRedWinner">Player Red Winner!</string>
+    <string name="playerBlueWinner">Player Blue Winner!</string>
+
+    <string name="playAgainButton">Play Again!</string>
 </resources>
