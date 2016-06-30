@@ -8,5 +8,7 @@
     <string name="playerRedWinner">Player Red Winner!</string>
     <string name="playerBlueWinner">Player Blue Winner!</string>
 
+    <string name="drawGame">Draw Game</string>
+
     <string name="playAgainButton">Play Again!</string>
 </resources>

@@ -19,6 +19,7 @@ import com.lotuscoder.tictactoe.animations.BounceInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean activeGame = true;
     private int activePlayer = 0;
     private int[] slots = {2,2,2,2,2,2,2,2,2};
     private int[][] winningPositions = {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageSlot = (ImageView) view;
         int imageSlotPosition = Integer.parseInt(imageSlot.getTag().toString());
 
-        if (this.slots[imageSlotPosition] == 2) {
+        if (this.slots[imageSlotPosition] == 2 && activeGame) {
 
             this.slots[imageSlotPosition] = this.activePlayer;
 
@@ -62,8 +63,20 @@ public class MainActivity extends AppCompatActivity {
                         && this.slots[winningPosition[1]] == this.slots[winningPosition[2]]
                         && this.slots[winningPosition[0]] != 2) {
 
+                    this.activeGame = false;
                     this.endGame(this.slots[winningPosition[0]]);
 
+                } else {
+
+                    this.activeGame = false;
+
+                    for (int slot : this.slots) {
+                        if (slot == 2) this.activeGame = true;
+                    }
+
+                    if (this.activeGame == false) {
+                        this.endGame(2);
+                    }
                 }
             }
         }
@@ -83,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
         activePlayerTextView.setTextColor(color);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void endGame(final int winner) {
+    public void endGame(final int state) {
         final RelativeLayout winnerMessageContainer = (RelativeLayout) findViewById(R.id.winnerMessageContainer);
         final RelativeLayout winnerMessageBox = (RelativeLayout) findViewById(R.id.winnerMessageBox);
 
@@ -102,12 +114,22 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation arg0) {
                 winnerMessageContainer.setVisibility(View.VISIBLE);
 
-                CharSequence winnerMessage = getText(R.string.playerBlueWinner);
-                int color = ContextCompat.getColor(getBaseContext(), R.color.colorBlue);
+                CharSequence winnerMessage;
+                int color;
 
-                if (winner == 1) {
-                    winnerMessage = getText(R.string.playerRedWinner);
-                    color = ContextCompat.getColor(getBaseContext(), R.color.colorRed);
+                switch (state) {
+                    case 0:
+                        winnerMessage = getText(R.string.playerBlueWinner);
+                        color = ContextCompat.getColor(getBaseContext(), R.color.colorBlue);
+                        break;
+                    case 1:
+                        winnerMessage = getText(R.string.playerRedWinner);
+                        color = ContextCompat.getColor(getBaseContext(), R.color.colorRed);
+                        break;
+                    default:
+                        winnerMessage = getText(R.string.drawGame);
+                        color = ContextCompat.getColor(getBaseContext(), R.color.colorWetAsphalt);
+                        break;
                 }
 
                 TextView winnerMessageTextView = (TextView) findViewById(R.id.winnerMessage);
